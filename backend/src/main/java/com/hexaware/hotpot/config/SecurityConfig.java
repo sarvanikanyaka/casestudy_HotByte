@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,16 +33,12 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .authorizeHttpRequests(auth -> auth
-
         	    .requestMatchers("/api/auth/**").permitAll()
-        	    .requestMatchers("/api/users/**").permitAll()
-        	    .requestMatchers("/api/menu/**").permitAll() 
-
-        	    .requestMatchers("/api/admin/**").permitAll() 
-        	    .requestMatchers("/api/orders/**").permitAll()
-        	    .requestMatchers("/api/orders/**").permitAll()
-        	    .requestMatchers("/cart/**").permitAll()
-
+        	    .requestMatchers("/api/users/register").permitAll()
+        	    .requestMatchers(HttpMethod.GET, "/api/menu/**").permitAll() 
+        	    .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN") 
+        	    .requestMatchers("/api/orders/**").authenticated()
+        	    .requestMatchers("/cart/**").authenticated()
         	    .anyRequest().authenticated()
         	)
         .sessionManagement(session -> session

@@ -25,10 +25,12 @@ const placeOrder = async () => {
     return;
   }
 
+  const currentUserId = parseInt(localStorage.getItem("userId")) || 1;
+
   try {
     // 1. Place the order
     await API.post("/api/orders/place", {
-      user: { userId: 1 }, 
+      user: { userId: currentUserId }, 
       totalAmount: total,
       address,
       phone,

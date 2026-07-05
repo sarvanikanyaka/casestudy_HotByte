@@ -78,7 +78,9 @@ public class OrderServiceImpl implements OrderService {
         OrderStatus orderStatus = orderStatusRepository.findByStatusName(status);
 
         if(orderStatus == null) {
-            throw new RuntimeException("Invalid status");
+            orderStatus = new OrderStatus();
+            orderStatus.setStatusName(status);
+            orderStatus = orderStatusRepository.save(orderStatus);
         }
 
         order.setStatus(orderStatus);

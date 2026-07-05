@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import Navbar from "../components/Navbar";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const userId = 1;
+  const nav = useNavigate();
+  const userId = localStorage.getItem("userId") || 1;
 
   useEffect(() => {
     API.get(`/api/orders/user/${userId}`)
@@ -63,6 +65,23 @@ function Orders() {
               <p style={{ fontSize: "14px", color: "#555" }}>
                 Date: {date}
               </p>
+
+              <button
+                onClick={() => nav(`/tracking/${order.orderId}`)}
+                style={{
+                  background: "#ff5722",
+                  color: "white",
+                  border: "none",
+                  padding: "8px 12px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  marginTop: "10px",
+                  width: "100%",
+                  fontWeight: "bold"
+                }}
+              >
+                Track Order 🚚
+              </button>
 
             </div>
           );

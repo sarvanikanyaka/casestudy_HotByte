@@ -14,6 +14,9 @@ import com.hexaware.hotpot.repository.CartItemRepository;
 import com.hexaware.hotpot.repository.CartRepository;
 import com.hexaware.hotpot.repository.MenuRepository;
 import com.hexaware.hotpot.repository.UserRepository;
+import com.hexaware.hotpot.entity.User;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -91,7 +94,14 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart getAuthenticatedUserCart() {
-		// TODO Auto-generated method stub
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			String email = authentication.getName();
+			User user = userRepository.findByEmail(email);
+			if (user != null) {
+				return cartRepository.findByUser_UserId(user.getUserId());
+			}
+		}
 		return null;
 	}
 

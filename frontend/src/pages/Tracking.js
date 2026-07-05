@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function OrderTracking() {
 
  const steps =
-  ["PROCESSING", "PREPARING", "OUT_FOR_DELIVERY", "DELIVERED"];
+  ["PENDING", "PROCESSING", "PREPARING", "OUT_FOR_DELIVERY", "DELIVERED"];
 
  const [status, setStatus] = useState(0);
- const [orderId] = useState(1); // 👉 change dynamically if needed
+ const { orderId } = useParams();
+
+ const role = localStorage.getItem("role");
+ const isAdmin = role === "ROLE_ADMIN";
 
 
  useEffect(() => {
   axios.get(`http://localhost:8080/api/orders/${orderId}`)
    .then(res => {
-    const backendStatus = res.data.status;
+    const backendStatus = res.data.orderStatus || "PENDING";
 
     const index = steps.indexOf(backendStatus);
     if (index !== -1) setStatus(index);
@@ -38,7 +42,7 @@ function OrderTracking() {
  const markDelivered = () => {
   axios.put(`http://localhost:8080/api/admin/orders/${orderId}?status=DELIVERED`)
    .then(() => {
-    setStatus(3);
+    setStatus(steps.length - 1);
     alert("Order Delivered ✅");
    })
    .catch(err => console.log(err));
@@ -98,44 +102,46 @@ function OrderTracking() {
      </div>
     ))}
 
-    <div style={{ marginTop: "20px" }}>
+     {isAdmin && (
+     <div style={{ marginTop: "20px" }}>
 
-     {/* Next Step */}
-     <button
-      disabled={status === 3}
-      onClick={handleNext}
-      style={{
-       width: "100%",
-       padding: "10px",
-       background: status === 3 ? "#ccc" : "#ff22d3",
-       color: "white",
-       border: "none",
-       borderRadius: "5px",
-       cursor: status === 3 ? "not-allowed" : "pointer",
-       marginBottom: "10px"
-      }}
-     >
-      Next Step
-     </button>
+      {/* Next Step */}
+      <button
+       disabled={status === steps.length - 1}
+       onClick={handleNext}
+       style={{
+        width: "100%",
+        padding: "10px",
+        background: status === steps.length - 1 ? "#ccc" : "#ff22d3",
+        color: "white",
+        border: "none",
+        borderRadius: "5px",
+        cursor: status === steps.length - 1 ? "not-allowed" : "pointer",
+        marginBottom: "10px"
+       }}
+      >
+       Next Step
+      </button>
 
-     {/* Mark Delivered */}
-     <button
-      disabled={status === 3}
-      onClick={markDelivered}
-      style={{
-       width: "100%",
-       padding: "10px",
-       background: status === 3 ? "#ccc" : "green",
-       color: "white",
-       border: "none",
-       borderRadius: "5px",
-       cursor: status === 3 ? "not-allowed" : "pointer"
-      }}
-     >
-      Mark Delivered
-     </button>
+      {/* Mark Delivered */}
+      <button
+       disabled={status === steps.length - 1}
+       onClick={markDelivered}
+       style={{
+        width: "100%",
+        padding: "10px",
+        background: status === steps.length - 1 ? "#ccc" : "green",
+        color: "white",
+        border: "none",
+        borderRadius: "5px",
+        cursor: status === steps.length - 1 ? "not-allowed" : "pointer"
+       }}
+      >
+       Mark Delivered
+      </button>
 
-    </div>
+     </div>
+     )}
 
    </div>
 

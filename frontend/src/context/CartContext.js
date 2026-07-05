@@ -5,14 +5,15 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
 
-  const userId = 1;
-
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
 
+  const getUserId = () => localStorage.getItem("userId") || 1;
+
   const addToCart = async (menuId) => {
+    const currentUserId = getUserId();
     try {
-      await API.post(`/cart/add/1?menuId=${menuId}&qty=1`);
+      await API.post(`/cart/add/${currentUserId}?menuId=${menuId}&qty=1`);
       await loadCart();
       alert("Added to cart");
     } catch (err) {
@@ -21,8 +22,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const loadCart = async () => {
+    const currentUserId = getUserId();
     try {
-      const res = await API.get(`/cart/user/${userId}`);
+      const res = await API.get(`/cart/user/${currentUserId}`);
       const data = res.data || [];
 
       setCart(data);
@@ -38,9 +40,10 @@ export const CartProvider = ({ children }) => {
   };
 
  const clearCart = async () => {
+  const currentUserId = getUserId();
   try {
     
-    await API.delete(`/cart/clear/${userId}`); 
+    await API.delete(`/cart/clear/${currentUserId}`); 
     setCart([]);
     setCartCount(0);
     

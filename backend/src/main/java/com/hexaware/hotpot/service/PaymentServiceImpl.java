@@ -31,7 +31,6 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	public Payment makePayment(Payment payment) {
-
-		return null;
+		return processPayment(payment);
 	}
 }

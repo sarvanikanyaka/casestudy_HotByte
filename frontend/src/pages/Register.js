@@ -28,7 +28,7 @@ function Register(){
    try{
     setMsg("");
 
-    await API.post("/users/register", {
+    await API.post("/api/users/register", {
       name: data.name,
       email: data.email,
       password: data.password

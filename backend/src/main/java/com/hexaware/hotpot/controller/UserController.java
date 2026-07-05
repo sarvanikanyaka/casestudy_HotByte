@@ -11,7 +11,7 @@ import com.hexaware.hotpot.service.UserService;
 import com.hexaware.hotpot.util.JwtUtil;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 

@@ -99,7 +99,6 @@ public class Order {
 
 
 	public void setTotalAmount(BigDecimal total) {
-		// TODO Auto-generated method stub
-		
+		this.totalAmount = total;
 	}
-    }
+}
