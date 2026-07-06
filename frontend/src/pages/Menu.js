@@ -4,6 +4,59 @@ import Navbar from "../components/Navbar";
 import API from "../services/api";
 import { CartContext } from "../context/CartContext";
 
+const getCategoryFallbackImage = (categoryName, itemName) => {
+  const cat = (categoryName || "").toLowerCase();
+  const name = (itemName || "").toLowerCase();
+  
+  if (cat.includes("pizza") || name.includes("pizza") || name.includes("garlic bread")) {
+    return "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400";
+  }
+  if (cat.includes("burger") || name.includes("burger") || name.includes("whopper") || name.includes("fries") || name.includes("onion ring")) {
+    return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400";
+  }
+  if (cat.includes("biryani") || cat.includes("rice") || name.includes("biryani") || name.includes("rice")) {
+    return "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=400";
+  }
+  if (cat.includes("dessert") || name.includes("cake") || name.includes("muffin") || name.includes("brownie") || name.includes("pudding") || name.includes("jamun") || name.includes("baklava") || name.includes("sweet")) {
+    return "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=400";
+  }
+  if (cat.includes("pasta") || name.includes("pasta") || name.includes("lasagna") || name.includes("spaghetti")) {
+    return "https://images.unsplash.com/photo-1563379971899-660589a01cf3?q=80&w=400";
+  }
+  if (cat.includes("sandwich") || name.includes("sub") || name.includes("sandwich") || name.includes("croissant")) {
+    return "https://images.unsplash.com/photo-1550507992-eb63ffee0847?q=80&w=400";
+  }
+  if (cat.includes("taco") || name.includes("taco") || name.includes("quesadilla") || name.includes("burrito") || name.includes("nacho")) {
+    return "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=400";
+  }
+  if (cat.includes("sushi") || cat.includes("japanese") || name.includes("sushi") || name.includes("roll") || name.includes("ramen")) {
+    return "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=400";
+  }
+  if (cat.includes("chicken") || name.includes("chicken") || name.includes("wing") || name.includes("nugget")) {
+    return "https://images.unsplash.com/photo-1513639776629-7b61b0ac598e?q=80&w=400";
+  }
+  if (cat.includes("waffle") || name.includes("waffle") || name.includes("pancake")) {
+    return "https://images.unsplash.com/photo-1562376502-6f769499c886?q=80&w=400";
+  }
+  if (cat.includes("chinese") || name.includes("chow mein") || name.includes("dumpling") || name.includes("spring roll") || name.includes("wok")) {
+    return "https://images.unsplash.com/photo-1525755662778-989d0524087e?q=80&w=400";
+  }
+  if (cat.includes("kebab") || cat.includes("wrap") || name.includes("kebab") || name.includes("shawarma") || name.includes("falafel") || name.includes("tikka")) {
+    return "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=400";
+  }
+  if (cat.includes("cafe") || cat.includes("beverage") || name.includes("coffee") || name.includes("tea") || name.includes("latte") || name.includes("cookie") || name.includes("frappe")) {
+    return "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=400";
+  }
+  if (cat.includes("salad") || cat.includes("healthy") || name.includes("salad") || name.includes("smoothie")) {
+    return "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400";
+  }
+  if (cat.includes("south indian") || name.includes("dosa") || name.includes("idli") || name.includes("vada") || name.includes("uttapam") || name.includes("upma")) {
+    return "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=400";
+  }
+  
+  return "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400";
+};
+
 function Menu() {
   const { restaurantId } = useParams();
   const nav = useNavigate();
@@ -176,10 +229,10 @@ function Menu() {
               <div key={item.menuId} className="premium-card menu-card animate-slide-up">
                 <img
                   className="menu-card-img"
-                  src={item.imageUrl || "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400"}
+                  src={item.imageUrl && !item.imageUrl.includes("placeholder") ? item.imageUrl : getCategoryFallbackImage(item.category?.categoryName, item.itemName)}
                   alt={item.itemName}
                   onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400";
+                    e.target.src = getCategoryFallbackImage(item.category?.categoryName, item.itemName);
                   }}
                 />
 
