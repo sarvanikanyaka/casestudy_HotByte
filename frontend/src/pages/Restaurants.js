@@ -106,7 +106,7 @@ function Restaurants() {
                   <div className="cuisine-tags">{restaurant.cuisineType || "Fast Food"}</div>
 
                   <div className="card-footer">
-                    <span>📍 {restaurant.location.split(",")[0]}</span>
+                    <span>📍 {restaurant.location ? restaurant.location.split(",")[0] : "Location N/A"}</span>
                     <span style={{ color: "hsl(var(--primary))", fontWeight: "bold" }}>30-40 mins</span>
                   </div>
                 </div>
