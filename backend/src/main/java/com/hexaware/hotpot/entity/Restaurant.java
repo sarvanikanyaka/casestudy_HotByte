@@ -34,6 +34,14 @@ public class Restaurant {
 
     private String password;
 
+    @Column(name = "cuisine_type")
+    private String cuisineType;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    private Double rating;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

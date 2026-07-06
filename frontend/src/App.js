@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Restaurants from "./pages/Restaurants";
 import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -26,7 +27,8 @@ function App() {
      <Route path="/register" element={<Register />} />
 
      {/* User */}
-     <Route path="/home" element={<Menu />} />
+     <Route path="/home" element={<Restaurants />} />
+     <Route path="/restaurant/:restaurantId" element={<Menu />} />
      <Route path="/cart" element={<Cart />} />
      <Route path="/checkout" element={<Checkout />} />
      <Route path="/tracking/:orderId" element={<Tracking />} />

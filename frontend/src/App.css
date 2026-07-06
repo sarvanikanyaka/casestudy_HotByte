@@ -1,38 +1,331 @@
-.App {
-  text-align: center;
+/* Dashboard Layout & Styling */
+.main-layout {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Category Filter Tags */
+.filter-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 8px 0 20px 0;
+  margin-bottom: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.filter-tag {
+  background: white;
+  color: hsl(var(--text-dark));
+  border: 1px solid hsl(var(--border-light));
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.filter-tag:hover {
+  border-color: rgba(var(--primary), 0.5);
+  color: hsl(var(--primary));
+}
+
+.filter-tag.active {
+  background: hsl(var(--primary));
+  color: white;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 4px 12px rgba(252, 128, 25, 0.2);
+}
+
+/* Search Bar Wrapper */
+.search-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 24px 18px 50px;
+  border-radius: var(--border-radius-md);
+  border: 1.5px solid hsl(var(--border-light));
+  font-family: var(--font-body);
+  font-size: 16px;
+  outline: none;
+  background: white;
+  box-shadow: var(--card-shadow);
+}
+
+.search-input:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 10px 25px rgba(252, 128, 25, 0.1);
+}
+
+.search-icon-svg {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--text-muted));
+}
+
+/* Premium Grid */
+.restaurant-grid, .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Restaurant Card Detail */
+.restaurant-card {
+  cursor: pointer;
+}
+
+.restaurant-img-container {
+  position: relative;
+  height: 180px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.restaurant-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.restaurant-card:hover .restaurant-img {
+  transform: scale(1.08);
+}
+
+.rating-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: hsl(var(--accent));
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-details {
+  padding: 20px;
+}
+
+.cuisine-tags {
+  font-size: 13px;
+  color: hsl(var(--text-muted));
+  margin: 6px 0 12px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid hsl(var(--border-light));
+  padding-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: hsl(var(--text-dark));
+}
+
+/* Menu Item Specific Card */
+.menu-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.menu-card-img {
+  height: 170px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.menu-veg-icon {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #2e7d32;
+  display: inline-flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  margin-right: 8px;
+}
+
+.menu-veg-icon::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: #2e7d32;
+  border-radius: 50%;
+}
+
+.menu-nonveg-icon {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #c62828;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.menu-nonveg-icon::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: #c62828;
+  border-radius: 50%;
+}
+
+/* Split Checkout Page */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 900px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Interactive Payment Modal */
+.payment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.payment-card-box {
+  background: white;
+  padding: 30px;
+  border-radius: var(--border-radius-md);
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Simulated Credit Card Graphic */
+.credit-card-preview {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 12px;
+  padding: 24px;
   color: white;
+  position: relative;
+  aspect-ratio: 1.586;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  font-family: monospace;
 }
 
-.App-link {
-  color: #61dafb;
+/* Spinner */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-left-color: hsl(var(--primary));
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success Checkmark Animation */
+.success-checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.success-checkmark .check-icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 50%;
+  box-sizing: content-box;
+  border: 4px solid #4CAF50;
+}
+
+.success-checkmark .check-icon::before {
+  top: 3px;
+  left: -2px;
+  width: 30px;
+  transform-origin: 100% 50%;
+  border-radius: 100px 0 0 100px;
+}
+
+.success-checkmark .check-icon::after {
+  top: 0;
+  left: 30px;
+  width: 60px;
+  transform-origin: 0 50%;
+  border-radius: 0 100px 100px 0;
+}
+
+.success-checkmark .check-icon .icon-line {
+  height: 5px;
+  background-color: #4CAF50;
+  display: block;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+}
+
+.success-checkmark .check-icon .icon-line.line-tip {
+  top: 46px;
+  left: 14px;
+  width: 25px;
+  transform: rotate(45deg);
+  animation: icon-line-tip 0.75s;
+}
+
+.success-checkmark .check-icon .icon-line.line-long {
+  top: 38px;
+  right: 8px;
+  width: 47px;
+  transform: rotate(-45deg);
+  animation: icon-line-long 0.75s;
+}
+
+@keyframes icon-line-tip {
+  0% { width: 0; top: 19px; left: -10px; }
+  54% { width: 0; top: 19px; left: -10px; }
+  70% { width: 50px; top: 37px; left: -8px; }
+  84% { width: 17px; top: 48px; left: 21px; }
+  100% { width: 25px; top: 46px; left: 14px; }
+}
+
+@keyframes icon-line-long {
+  0% { width: 0; top: 54px; right: 46px; }
+  65% { width: 0; top: 54px; right: 46px; }
+  84% { width: 55px; top: 35px; right: 0px; }
+  100% { width: 47px; top: 38px; right: 8px; }
 }
