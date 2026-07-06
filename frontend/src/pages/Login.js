@@ -40,25 +40,49 @@ const handleSubmit = async (e) => {
   }
 };
 
- return(
-  <div className="auth-container">
-   <div className="container">
+  return (
+    <div className="auth-container">
+      <div className="auth-card">
+        <h1 className="auth-logo">HotByte</h1>
+        <p className="auth-subtitle">Login to discover fresh, delicious meals</p>
 
-    <h1>HotByte Login</h1>
+        {error && <p className="auth-error">⚠️ {error}</p>}
 
-    {error && <p className="error">{error}</p>}
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="auth-input-group">
+            <label>Email Address</label>
+            <input 
+              name="email" 
+              className="premium-input" 
+              placeholder="e.g., alex@example.com" 
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <div className="auth-input-group">
+            <label>Password</label>
+            <input 
+              name="password" 
+              type="password" 
+              className="premium-input" 
+              placeholder="••••••••" 
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-    <form onSubmit={handleSubmit}>
-     <input name="email" placeholder="Email" onChange={handleChange}/>
-     <input name="password" type="password" placeholder="Password" onChange={handleChange}/>
-     <button type="submit">Login</button>
-    </form>
+          <button type="submit" className="btn-primary" style={{ width: "100%", padding: "14px", marginTop: "10px" }}>
+            Login & Explore
+          </button>
+        </form>
 
-    <a href="/register">Register</a>
-
-   </div>
-  </div>
- );
+        <div className="auth-link-container">
+          New to HotByte? <a href="/register">Create an account</a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
