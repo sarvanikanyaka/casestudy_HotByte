@@ -67,64 +67,140 @@ public class Menu {
     @Column(name = "is_available")
     private Boolean isAvailable;
 
-	public Restaurant getRestaurant() {
-	    return restaurant;
-	}
+    public Integer getMenuId() {
+        return menuId;
+    }
 
-	public void setItemName(String itemName) {
-	    this.itemName = itemName;
-	}
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
+    }
 
-	public String getItemName() {
-	    return itemName;
-	}
-	public BigDecimal getPrice() {
-	    return price;
-	}
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
 
-	public void setPrice(BigDecimal price) {
-	    this.price = price;
-	}
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 
-	public Integer getCalories() {
-		return calories;
-	}
+    public Category getCategory() {
+        return category;
+    }
 
-	public void setCalories(Integer calories) {
-		this.calories = calories;
-	}
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-	public BigDecimal getFats() {
-		return fats;
-	}
+    public String getItemName() {
+        return itemName;
+    }
 
-	public void setFats(BigDecimal fats) {
-		this.fats = fats;
-	}
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 
-	public BigDecimal getCarbohydrates() {
-		return carbohydrates;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setCarbohydrates(BigDecimal carbohydrates) {
-		this.carbohydrates = carbohydrates;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public BigDecimal getProteins() {
-		return proteins;
-	}
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	public void setProteins(BigDecimal proteins) {
-		this.proteins = proteins;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	public Integer getMenuId() {
-		return menuId;
-	}
+    public BigDecimal getDiscountPrice() {
+        return discountPrice;
+    }
 
-	public BigDecimal getItemPrice() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setDiscountPrice(BigDecimal discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public String getAvailabilityTime() {
+        return availabilityTime;
+    }
+
+    public void setAvailabilityTime(String availabilityTime) {
+        this.availabilityTime = availabilityTime;
+    }
+
+    public Boolean getIsVeg() {
+        return isVeg;
+    }
+
+    public void setIsVeg(Boolean isVeg) {
+        this.isVeg = isVeg;
+    }
+
+    public String getTasteInfo() {
+        return tasteInfo;
+    }
+
+    public void setTasteInfo(String tasteInfo) {
+        this.tasteInfo = tasteInfo;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    public BigDecimal getFats() {
+        return fats;
+    }
+
+    public void setFats(BigDecimal fats) {
+        this.fats = fats;
+    }
+
+    public BigDecimal getProteins() {
+        return proteins;
+    }
+
+    public void setProteins(BigDecimal proteins) {
+        this.proteins = proteins;
+    }
+
+    public BigDecimal getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public void setCarbohydrates(BigDecimal carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
+    public Integer getCookingTime() {
+        return cookingTime;
+    }
+
+    public void setCookingTime(Integer cookingTime) {
+        this.cookingTime = cookingTime;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 
 }
